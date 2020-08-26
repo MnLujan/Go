@@ -1,3 +1,7 @@
-#Elementos no necesarios en el repo
-.idea/**
+#Elementos no necesarios en el repositorio
+.idea/
+*.iml
+*.xml
+*.txt
+
 
