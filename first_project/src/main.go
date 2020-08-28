@@ -1,20 +1,18 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 )
+
+type persona struct {
+	edad int
+	apellido string
+	next *persona
+
+}
 
 func main() {
 	fmt.Println("Hola perri")
-	reader := bufio.NewReader(os.Stdin)
-	text, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println(nil)
-	} else {
-		fmt.Println(text)
-	}
 	arreglo := [5]int{1,2,3,4}
 	fmt.Println(arreglo)
 	aux := arreglo[0:2]
@@ -26,4 +24,13 @@ func main() {
 	fmt.Println(aux2)
 	aux2 = append(aux2, 8)
 	fmt.Println(aux2)
+	copy(aux, aux2)
+	fmt.Println(aux)
+	martin := new(persona)
+	martin.apellido = "Lujan"
+	martin.edad = 23
+	fmt.Println(*martin)
+	martin.edad++
+	fmt.Println(*martin)
+	
 }
