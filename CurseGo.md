@@ -72,6 +72,7 @@ GO el unico metodo de iteracion que tiene es el **for** y tiene la misma sintaxi
  - for i:=0; i<10; i++{ }
  - for{} *Este ciclo es infinito*
  - for i>10{i++} *Habiendo declarado antes i*
+ - for index; content := range myArray{} *Este ultimo simula el foreach, si el index no nos interesa, podemos usar el operador **_***
 
 ###*Arreglos*
 
@@ -183,7 +184,125 @@ Esto se debe tener en cuenta dependiendo de que queremos hacer y si queremos aho
 
 ######Campos anonimos
 
+Como bien dijimos anteriormente, GO no es un lenguaje orientado a objetos pero existen estas opciones porque nos permiten replicar la **herencia** de estos lenguajes. Primero definimos una estructura para ejemplificar:
 
+>type Human struct{
+    name string
+    }
+
+A continuacion definimos un campo anonimo:
+
+>type Tutor struct{
+    Human
+    }
+    >>*Se declara como*
+    tutor **:=** Human{"Martin"}
+    *Si no se le pasa los valores la estructura inicializa con los valores por defecto*
+
+Podemos acceder a los valores de **Human** y a las funciones que esten asociadas a esta estructura desde **Tutor**. 
+
+###*Interfaces*
+
+Las interfaces son estructuras de datos que definen metodos vacios. Estos a su vez sin un tipo de dato que podemos pasar entre funciones. Esto nos permite que varias estructuras diferentes implementen la misma interfaz y a su vez, estas estructuras utilizar funciones que reciban a la interfaz como parametro, ahorrando codigo. 
+La declaraion de interfaces tiene la siguiente sintaxis:
+
+>Sintaxis:
+**Type** User **interface**{
+    *name_func1* **tipe**
+    *name_func2* **tipe**
+    *name_func3* **tipe**
+    }
+
+Podemos sobreescribir cada metodo para una estructura diferente.
+
+>Por ejemplo:
+**func** (this name_struc) **name_func1 tipe**{
+    }
+    *Para cada estructura el metodo hace algo distinto*
+
+Ademas, podemos implementar una funcion que reciba a la interfaz como parametro, esto nos permite que cualquer estructura que implemente la interfaz, podra hacer uso de dicha funcion.
+
+>Por ejemplo:
+**func** auth(*var* **name_interface**) **tipe**{
+    }
+
+###*GOroutines*
+
+Entramos en la seccion de concurrencia dentro del lenguaje. Go no nos permite crear hilos como en java, ejecutamos "hilos" implementados a nivel de software, lo cual los hace mas livianos que un hilo comun. Go cuenta con un balanceador de cargas lo cual administra las distintas **Go routines** que asignemos. Se comportan de tal manera que pareciera que fueran hilos independientes, pero a bajo nivel no lo son. 
+
+Si realziamos la llamada de una funcion y anteponemos la instruccion **go** bastara con ejecutar esa parte del codigo en concurrencia con el hilo Main.
+
+>Por ejemplo:
+**go** name_func()
+
+Algo que se debe aclarar es que el hilo padre no esperara a que el hijo termine su ejecucion, por lo que si no se le aclara, el Main finalizara su ejecucion matando a cualquier hilo que se encuentra ejecutando en ese momento. 
+
+Otra manera de crear concurrencia es en lugar de llamar una funcion anteponiendo la instruccion **go** podemos ejecutar un bloque de codigo de manera concurrente. 
+
+>Por ejemplo:
+**go func()**{
+    *Cualquier codigo aqui dentro sera ejecutado en concurrencia*
+    }()
+
+######Channels
+
+Los **Channels** o canales nos sirven para comunicar tareas que se esten realizando concurrentemente. Mediante estos canales podemos enviar numeros, cadenas, estructuras, etc.
+Para la creacion de un canal debemos utilizar la funcion **make()** antes vista.
+
+>Sintaxis:
+channel **:=** make(**chan** *tipe*)
+
+A continuacion debemos indicarle a la **go routine** que utilizaremos un canal, esto es de la siguiente manera:
+
+>Sintaxis:
+**go func**(*name_channel* **chan** *tipe*){
+    *Codigo a ejecutar*
+    }(*name_channel*)
+
+Para ingresar o extraer datos desde el **channel** se utiliza el operador **<-**.
+
+>Sintaxis:
+*name_channel* **<-** *var*
+*var* **<-** *name_channel*
+
+En el repositorio se adjunta un ejercicio **ej_channel/channels.go** ejemplificando mejor un codigo que haga uso de esta herramienta.
+
+###*Lectura de archivos*
+
+######Version 1:
+
+Implementaremos una nueva libreria llamada **io/ioutil** la cual contiene las funciones necesarias para la lectura de archivos.
+
+La siguiente manera es la mas sencilla pero tiene una ventaja que veremos acontinuacion:
+
+>Sintaxis:
+data_file,err **:=** ioutil.ReadFile("*./ruta*")
+*El valor entregado por la funcion es en Bytes*
+**string**(data_file)
+*Ejemplo de como convertirlo en una cadena*
+
+
+- La ruta se la podemos especificar con "./MiRuta." Con el ./ indicamos que el archivo se eucneutra en la misma carpeta que el binario. 
+- Si el archivo no esta en la misma carpeta se debera indicar la ruta absoluta mediante **/**,  por ejemplo: "/MiRuta"
+
+Go para leer el archvio de esa manera lo cargara en su totalidad en memoria, lo cual si nuestro archivo es grande podria traernos problemas. Ademas de que si quisieramos imprimir, nos imprime la totalidad del mismo.
+
+######Version 2:
+
+Para la siguiente version necesitamos dos librerias antes vistas **os** y **bufio**. Estas librerias nos permiten leer el archivo linea por linea.
+Lo primero que debemos hacer es abrir el archivo:
+
+>Sintaxis:
+*name_var*,*err* **:=** os.**Open**("./MiRuta")
+*La funcion nos retorna el puntero a la primera linea del archivo y err es la por si se genera un error al intentar abrirlo*
+
+Paso siguiente deberemos generar un **Scanner** para ir leyendo las lineas. 
+
+>Sintaxis:
+*name_var* **:=** bufio.**NewScanner**(*name_file*)
+
+Una vez creado el Scanner podremos ir linea por linea leyendo el archivo de diferentes maneras.
+Dentro del ejemplo en el repositorio se encuentra un ejemplo detallado. Buscar en **ej_Readfile/readfile.go**.
 
 
 
