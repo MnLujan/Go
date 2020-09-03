@@ -14,7 +14,7 @@ El lenguaje requiere la siguiente sintaxis:
     > **var** boleano **bool**
     **var** numeros **[]int**
 
-Cabe aclarar que los datos de tipo string, se inicializan como una cadena vacia, o los valores **bool** en **false**. Ademas, GO nos exigue que cada variable declarada, sea utilizada. Si lo anterior no se cumple, nuestro codigo no compilara.
+Cabe aclarar que los datos de tipo **string**, se inicializan como una cadena vacia, o los valores **bool** en **false**. Ademas, GO nos exigue que cada variable declarada, sea utilizada. Si lo anterior no se cumple, nuestro codigo no compilara.
 
 Si queremos declarar e inicializar la variable con un cierto valor, tenemos una segunda sintaxis:
 
@@ -33,7 +33,7 @@ La sintaxis para la conversion de un dato es de las iguiente manera:
 > edad **:=** 22
 > edad_string **:=** strconv.Itoa(edad)
 
-Si nosotros importamos una libreria y no es utiulizada, el compilador nos obligara a eliminarla.
+Si nosotros importamos una libreria y no es utilizada, el compilador nos obligara a eliminarla.
 
 Las funciones en GO pueden devolver mas de un valor, por lo que deberemos verificar esto y analizar si necesitamos este segundo valor que nos retorna. Si no lo necesitamos, debemos recurrir a una sintaxis, ya que recordemos que no podemos declara variables que no vamos a usar. Esta sintaxis es **"_"**, este operador indica que el valor a retornar no me interesa y puede ser descartado. 
 
@@ -385,13 +385,39 @@ http.**ServeFile**(w,r,**r.URL.Path[1:]**)
 
 **Dentro de ej_web se encuentra un ejercicio que ejemplifica lo visto anteriormente**
 
+######JSON
 
+Go es muy utilizado por las empresas para crear API's o servicios de Web y este lenguaje trae una libreria que puede hacer renders de JSON apartir de una estructura. Es una tecnologia ideal para las tareas antes mensionadas.
 
+Go nos da la posibilidad de generar el JSON apartir de una estructra o de un arreglo de estructuras, creando la posiblidad de generar varis a la vez y entregarlas al navegador.
 
+A continuacion se muestra como generar el JSON y entregarlo al navegador. Se introducen la libreria **encoding/json**.
 
+*La sintaxis de servidor es identica a la vista anteriormente*
 
+>Sintaxis:
+struct **:=** Struct{"lo q sea"}
+json.**NewEncoder**(w).**Encode**(struct) *Recordar que w es el objeto http visto anteriormente*
 
+Por convencion de JSON los campos dentro de las estructuras deben aparecer con letra mayuscula si no, no los generara. En caso de solicitar que el formato sea todo en minuscula se podra hacer lo siguiente:
 
+>Por ejemplo:
+type curso struct{
+    Title string  ``json: "titulo"` *Con una sola comilla invertida*
+}
 
+Para un mejor entendimiendo se encuentra un ejemplo en el repositorio. **ej_web_json**.
 
+---
 
+###Packages
+
+Se vera como se podra generar nuestros propios paquetes para poder utilziarlos en nuestros propios codigos o tener mas organizado todo un programa.
+
+*Datos a saber:*
+
+- GO por convencion, las funciones y atributos que comiencen con una letra minuscula seran privadas del paquete, por lo tanto, cuando quiera ser llamada desde otro programa no se podra acceder y nos dara error.
+
+- El segundo dato, es que cuando importamos un paquete, la funcion que se ejecuta de fondo y por mas que no este explicita es **init()** la cual sirve para pre-configurar todas las variables que necesite para poder funcionar.
+
+Se adjunta ejemplo de creacion e importacion de paquetes. **ej_packages**.
