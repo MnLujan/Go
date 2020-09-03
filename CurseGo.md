@@ -1,5 +1,5 @@
 #Documentacion Go
-
+---
 ###*Variables*
 
 Tenemos los mismos tipos de variables al igual que todos los leguajes, pero ¿como declararlos?
@@ -63,7 +63,7 @@ El input y output en GO se encuentra manejado por varias librerias, veremos algu
     reader nos retornara el valor leido y un valor adicional que indica la ausencia o presencia de error. Si la lectura es exitosa, retorna **nil**.
     *Sintaxis*:
     text,err **:=** reader.ReadString('\n') (El parametro es el stop de lectura)
-
+---
 ###*Ciclos*
 
 GO el unico metodo de iteracion que tiene es el **for** y tiene la misma sintaxis que en el resto de lenguajes.
@@ -73,7 +73,7 @@ GO el unico metodo de iteracion que tiene es el **for** y tiene la misma sintaxi
  - for{} *Este ciclo es infinito*
  - for i>10{i++} *Habiendo declarado antes i*
  - for index; content := range myArray{} *Este ultimo simula el foreach, si el index no nos interesa, podemos usar el operador **_***
-
+---
 ###*Arreglos*
 
 Al igual que en C/C++ podemos declarar arreglos de tamaño fijo pero no dinamico. Si no especificamos el valor de inicializacion este se inicializara con los valores predeterminados por Go. (para enteros el 0, string "", etc).
@@ -122,14 +122,14 @@ slice = append(slice, 6)
 
 Aqui estamos diciendo que en la posicion final del slice, agrege el valor 6. Entonces en la posicion 4 del arreglo se almacenara este valor, por mas que el largo del arreglo sea de 3.
 
-#####Copy
+######Copy
 
 Esta es una funcion que nos permite copiar un arreglo en otro. Recive 2 parametros dicha funcion, el destino de la copia y la fuente de onde copiar los datos. Dicha funcion copia el minimo de elementos que se termiten en el arreglo de destino. Es decir, si queremos copiar desde una fuente de largo 5 a un destino de largo 2, la funcion solo copiara 2 elementos. *Recordar que se puede jugar con la capacidad del arreglo para estos casos*.
 + Dato: La funcion **copy()** solo se puede utilizar con Slices, no con arreglos de tamaño fijo. 
 
 >Sintaxis:
     copy(destino, fuente)
-
+---
 ###*Punteros*
 
 La definicion de punteros en GO es identica a la de C/C++, por lo tanto no es necesario aclarar para que sirven y como funcionan. La sintaxis de la declaracion de un puntero es la siguiente:
@@ -140,7 +140,7 @@ var x ***int**
 entero := 5
 x = &entero
 *Si no se agrega un valor, si valor predeterminado sera **nil***
-
+---
 
 ###Estructuras
 
@@ -201,6 +201,7 @@ A continuacion definimos un campo anonimo:
 
 Podemos acceder a los valores de **Human** y a las funciones que esten asociadas a esta estructura desde **Tutor**. 
 
+---
 ###*Interfaces*
 
 Las interfaces son estructuras de datos que definen metodos vacios. Estos a su vez sin un tipo de dato que podemos pasar entre funciones. Esto nos permite que varias estructuras diferentes implementen la misma interfaz y a su vez, estas estructuras utilizar funciones que reciban a la interfaz como parametro, ahorrando codigo. 
@@ -226,6 +227,7 @@ Ademas, podemos implementar una funcion que reciba a la interfaz como parametro,
 **func** auth(*var* **name_interface**) **tipe**{
     }
 
+---
 ###*GOroutines*
 
 Entramos en la seccion de concurrencia dentro del lenguaje. Go no nos permite crear hilos como en java, ejecutamos "hilos" implementados a nivel de software, lo cual los hace mas livianos que un hilo comun. Go cuenta con un balanceador de cargas lo cual administra las distintas **Go routines** que asignemos. Se comportan de tal manera que pareciera que fueran hilos independientes, pero a bajo nivel no lo son. 
@@ -267,6 +269,7 @@ Para ingresar o extraer datos desde el **channel** se utiliza el operador **<-**
 
 En el repositorio se adjunta un ejercicio **ej_channel/channels.go** ejemplificando mejor un codigo que haga uso de esta herramienta.
 
+---
 ###*Lectura de archivos*
 
 ######Version 1:
@@ -303,6 +306,90 @@ Paso siguiente deberemos generar un **Scanner** para ir leyendo las lineas.
 
 Una vez creado el Scanner podremos ir linea por linea leyendo el archivo de diferentes maneras.
 Dentro del ejemplo en el repositorio se encuentra un ejemplo detallado. Buscar en **ej_Readfile/readfile.go**.
+
+
+*Recordar en ambos casos cerrar el archivo*
+
+>file_name.**close()**
+
+---
+
+###Defer
+
+Puede suceder por alguna confexion erronea del codigo, que nunca logremos ejecutar la funcion para cerrar el archivo. Esto es problematico y no es buen desempeño del codigo. Para esto existe el comando **defer** con el cual le decimos a GO que despues de que la funcion retorne o se produzca un error en la ejecucion si y solo si ejecute la funcion o bloque de codigo que continua a este comando.
+
+>Sintaxis:
+**defer** **func()**{} *Ejecucion de un bloque de codigo*
+**defer** name_func() *Ejecucion de una funcion en particular*
+
+###Panic y Recover
+
+
+La sentencia **panic()** es utilizado para parar la ejecucion del programa y retornar la informacion del error. Si se produce un error que es capturado con un **panic()** este fuerza el *return* de todas las funciones que haya en el stack incluyendo el propio *main()*. Por utlimo imprimira la informacion del error y donde se produjo.
+
+>Sintaxis:
+**panic**(name_error)
+
+En cambio, **recover()** es una sentencia que nos permite detener a *panic()* y permite seguir ejecutando el resto de programa. Esto nos permite capturar el error e impirmirlo, pero proseguir con la ejecucion del programa.
+Se puede colocar dentro de una sentencia *defer* para asegurarnos la ejecucion.
+
+>Sintaxis:
+**recover()** *Esto solo dentedra a panic() y seguira la ejecucion del programa.
+r **:=** **recover()** *Nos devuelve el error capturado por *panic()*.
+
+---
+
+###Web
+
+Veremos como levantar un servidor web sencillo. 
+
+Se necesitan los paquetes "net/http" y en este caso "io" para mostrar un msj por pantalla.
+
+Para levantar el servidor solo se necesita una funcion:
+
+>http.**ListenAndServe**(addres, handler)
+
+Los dos parametros son:
+- Addres es el puerto respectivo
+- Handler es tipicamente nil
+
+Ahora queremos que el servidor nos de un mensaje de bienvenida, esto es:
+
+>http.**HandlerFunc**("/", func)
+
+La funcion a la que se llama dependiendo del directorio que se acceda, recibe 2 parametros, los cuales son:
+
+- Una estructa que se encuentra dentro de http, esta nos permite definir como vamos a responderle al cliente.
+- Un puntero a la informacion de la peticion, es decir, lo que nos dijo el navegador
+
+>Por ejemplo:
+func **recep**(w **http.ResponseWriter**, r ***http.Request**){
+     *Cuerpo de la funcion*
+    }
+>>Dato: *w* representa un objeto de escritura, por lo tanto podemos usar librerias como "io" para imprimir el mensaje.
+
+######Mostrar archivo HTML
+
+De una manera muy sencilla podemos responder a una solicitud entregando un archivo **html** de una ruta en especifico. La sintaxis para levantar el server y capturar la llamada del navegador es identica, cambia las formas de encontrar la ruta del archivo.
+
+>Sintaxis 1
+*Dentro de la funcion*
+http.**ServeFile**(w,r,"ruta_absoluta")
+
+>Sintaxis 2
+*Dentro de la funcion*
+http.**ServeFile**(w,r,**r.URL.Path[1:]**)
+>>La funcion URL llamada por el puntero *r* basicamente parcea la ruta despues de "/" y la buscara en nuestro server. Siempre y cuando el archivo se encuentre junto al binario.
+>>>Dato: El nuermo dentro del Path representa apartir de donde toma los datos para la ruta, recordar que es un slice.
+
+
+**Dentro de ej_web se encuentra un ejercicio que ejemplifica lo visto anteriormente**
+
+
+
+
+
+
 
 
 
