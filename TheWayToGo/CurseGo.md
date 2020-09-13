@@ -145,4 +145,33 @@ Algunos operadores tienen prioridades más altas (precedencia) que otros. Los op
 
 ![](./Resources/precedence.png)
 
+---
+
+#### ¡Desafio!
+
+En el repositorio se encontrara una consigna para resolver, de esta manera se practicara la sintaxis y lo visto hasta el momento. Buscar en **./TheWayToGo/challenge_01**.
+
+---
+### Strings
+
+###### Introduccion:
+
+Las cadenas son una secuencia de caracteres UTF-8 (el código ASCII de 1 byte se usa cuando es posible y un código UTF-8 de 2-4 bytes cuando es necesario). UTF-8 es la codificación más utilizada. Es la codificación estándar para archivos de texto, archivos XML y cadenas JSON. Con el tipo de datos de cadena, puede reservar 4 bytes para caracteres, pero Go es lo suficientemente inteligente como para reservar un byte si la cadena es solo un carácter ASCII.
+
+###### Ventajas de los **Strings** en Go:
+
+- Las cadenas de texto y los archivos de texto ocupan menos memoria/espacio en disco (debido a los caracteres de ancho variable).
+- Dado que UTF-8 es el estándar, Go no necesita codificar y decodificar cadenas como lo hacen otros idiomas.
+
+###### Largo del String:
+
+Las cadenas en Go no terminan con un carácter especial como en C/C++. El valor inicial de una cadena es la cadena vacía "". Los operadores de comparación habituales (== ,!= , <, <=, >= Y >) funcionan en cadenas comparando byte por byte en la memoria.
+
+El largo del string (numero de bytes) esta dado por la funcion **len()**.
+
+Recordar que:
+
+- El primer byte de la cadena podemos acceder por **str[0]**
+- El i-esimo byte: **str[i]**
+- El ultimo byte por **str[len(str)-1]**
 
