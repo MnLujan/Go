@@ -175,3 +175,78 @@ Recordar que:
 - El i-esimo byte: **str[i]**
 - El ultimo byte por **str[len(str)-1]**
 
+### Paquete *strconv*
+
+###### Funciones del Paquete
+
+- Dentro del paquete nos encontramos con funciones que nos permite encontrar *prefijos* y *sufijos*. Estas funciones son **HasPrefix** y **HasSuffix**.
+
+*Prefijo:*
+> strings.HasPrefix(s, prefix, **string**) **bool**
+
+*Sufijo:*
+> strings.HasSuffix(s, suffix **string**) **bool**
+
+- Contamos con la funcion **Contains** que nos permite verificar si hay una cadena *string* dentro de otra.
+
+> strings.Contains(s, substr **string**) **bool**
+
+- La funcion **Index** nos devuelve el indice (numero) al primer elemento de la subcadena buscada e ingresada por parametro. La funcion devolvera **-1** en caso de no encontrar la subcadena.
+
+> string.Index(s, str **string**) **int**
+
+- **LastIndex** cumple el mismo objetivo que la funcion anterior pero para el primer elemento.
+
+- Podemos remplazar *strings* con **Replace**
+
+> strings.Replace(str, old, new **string**, n **int**)
+n: indica el numero de apariciones que queremos reemplazar. 
+
+- **Count** nos permite contar la cantidad de veces que se encuentra un caracter o sub cadena dentro de otra.
+
+> string.Count(s, str **string**) **int**
+
+- **Repeat** es una funcion que nos permite repetir una cadena un numero *n* de veces.
+
+> strings.Repeat(s, count **int**) **string**
+
+- Cambiar las mayusculas/minusculas de una cadena:
+
+> string.ToLower(s) **string**
+> string.ToUpper(s) **string**
+
+- Remover los espacios en blanco de una cadena
+
+> strings.TrimSpace(s)
+
+- En caso de querer eliminar un caracter en especifico se puede utilizar la siguiente funcion:
+
+> string.Trim(s, **str**) *donde str puede ser "\r\n"*
+
+- Si solo se quiere remover los espacios finales e iniciales de una cadena, se puede utilizar **TrimLeft** o **TrimRight** respectivamente.
+
+
+
+- Para partir una cadena podemos utilizar:
+
+> strings.Fields(s) *Separa por espacios en blanco*.
+> strings.Split(s, **sep**) *Separa la cadena por los caracteres ingresados por parametro*. 
+
+
+El paquete strings también tiene una función llamada strings.NewReader (str). Esto produce un puntero a un valor de Reader, que proporciona, entre otras, las siguientes funciones para operar en str:
+
+- Read() *para leer un byte*
+- ReadByte() *lee el proximo byte del string*
+- ReadRune() **? no se entiende, ver**
+
+###### Conversion Desde y Hacia un String
+
+El paquete strconv contiene algunas variables para calcular el tamaño en bits del **int** de la plataforma en la que se ejecuta el programa:
+
+> strconv.IntSize
+
+La conversión de una variable de cierto tipo en una cadena siempre se realizará correctamente. Para convertir de números, tenemos las siguientes funciones:
+
+> strconv.Itoa(int **int**) **string**  *Devuelve la representación de cadena decimal de i*.
+
+A continuación, tenemos:
