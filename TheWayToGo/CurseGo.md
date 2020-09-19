@@ -249,4 +249,43 @@ La conversión de una variable de cierto tipo en una cadena siempre se realizar�
 
 > strconv.Itoa(int **int**) **string**  *Devuelve la representación de cadena decimal de i*.
 
-A continuación, tenemos:
+A continuacion, tenemos:
+
+> strconv.FormatFloat(f **float64**, fmt **byte**, prec **int**, bitSize **int**) **string**
+
+Convierte el número de coma flotante de 64 bits f en una cadena, de acuerdo con el formato fmt (puede ser 'b', 'e', 'f' o 'g'), precisión prec, siendo bitSize **32** para **float32** o **64** para float64.
+
+*Para convertir a numeros, hacemos lo siguiente:*
+
+> strconv.Atoi(s **string**) (i **int**, err **error**) *Convertir a entero*
+
+Para convertir a  punto flotante de **64 bits**:
+
+> strconv.ParseFloat(s **string**, BitSize **int**) (f **float64**, err error)
+
+Aqui recordamos que hay funciones que devuelven 2 valores, por lo tanto, tendremos que hacer la asignacion multiple.
+
+- Por ejemplo:
+> val, err = strconv.Atoi(s)
+
+### Fecha y Tiempo
+
+Dentro del lenguaje nos encontramos con el paquete **time**. Dentro de este paquete nos encontramos varias funciones como:
+
+- **time.Now()** *Hora actual*
+- **t.Dat()**
+- **t.Day()**
+- **t.Minute()**
+
+
+Otra funcion util es Since(t **Time**) que devuelve el tiempo transcurrido desde **t**, el cual le podemos dar un formate definido con la sintaxis:
+
+> **func** Since(t **Time**) Format(s **string**) **string**
+
+*Para mas informacion, leer la documentacion de **GoLand***. Link [aqui](https://golang.org/pkg/time/).
+
+---
+
+### Punteros
+
+
