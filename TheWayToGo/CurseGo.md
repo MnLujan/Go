@@ -288,4 +288,23 @@ Otra funcion util es Since(t **Time**) que devuelve el tiempo transcurrido desde
 
 ### Punteros
 
+###### Introduccion
+
+Los punteros son importantes para el rendimiento e indispensables si desea programar aplicaciones cerca del sistema operativo y la red. 
+
+*Se realiza un repaso de la declaracion de punteros vista en el curso de introduccion a Go*
+
+La declaracion de un puntero se realiza de la siguiente manera:
+
+> **var** intP ***int**
+
+Por lo tanto la siguiente sintaxis es correcta:
+> intP = &a *Suponiendo que "a" variable o direccion*
+
+Una variable de puntero contiene la dirección de memoria de otro valor, lo que significa que apunta a ese valor en la memoria. El tamaño de un puntero es de 4 bytes en máquinas de 32 bits y de 8 bytes en máquinas de 64 bits, independientemente del tamaño del valor al que apuntan. Por supuesto, los punteros pueden declararse a un valor de cualquier tipo, ya sea primitivo o estructurado. El "*" se coloca antes del tipo de valor, por lo que es un modificador de tipo en esta seccion.
+
+
+Podemos representar el uso de la memoria de la siguiente manera:
+
+![](./Resources/punteros.png)
 
