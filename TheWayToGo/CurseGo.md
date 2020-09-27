@@ -23,13 +23,13 @@ Go es muy potente y puede tener muchos usos, pero podemos diferenciar y nombrar 
 
 Nos encontramos con 25 palabras clave reservadas:
 
-![](./Resources/Keyword.png)
+![](./.Resources/Keyword.png)
 
 ### Identificadores
 
 Go contiene 36 **identificadores pre-declarados**:
 
-![](./Resources/identifiers.png)
+![](./.Resources/identifiers.png)
 
 
 ###### Identificador Blanco
@@ -56,7 +56,7 @@ Tenemos el tipo *explicito* de declaracion y el *implicito*.
 
 Las constantes numericas no tienen signo. Ademas son de alta precision arbitraria y no generan Overflow. Ejemplo:
 
-![](./Resources/const.png)
+![](./.Resources/const.png)
 
 *Nota*: Usamos \ (barra invertida) para declarar la constante Ln2 porque se puede utilizar como carácter de continuación en una constante.
 
@@ -70,7 +70,7 @@ Ademas, tenemos **Enumeraciones** que es la lista de todas las **constantes** ut
 
 Por ultimo, podemos asignar un *type* y un nombre a la enumeracion. Por ejemplo:
 
-![](./Resources/nameEnum.png)
+![](./.Resources/nameEnum.png)
 
 ---
 
@@ -116,7 +116,7 @@ Un numero complejo se escribe de la forma:
 
  Ejemplo:
 
- ![](./Resources/complex.png)
+ ![](./.Resources/complex.png)
 
  Si *re* y *im* son de *float32* y sea una variable *c* del tipo *complex64*, esta ultima puede ser inicializada con la funcion complex:
 
@@ -130,7 +130,7 @@ El paquete *"math/rand"* implementa generadores de numeros pseudo aleatorios.
 
 - Ejemplo:
 
-![](./Resources/random.png)
+![](./.Resources/random.png)
 
 > Para la funcion *Intn(n)* el rango de valores que nos devolvera sera de 0 a **n-1**.
 
@@ -143,7 +143,7 @@ El paquete *"math/rand"* implementa generadores de numeros pseudo aleatorios.
 
 Algunos operadores tienen prioridades más altas (precedencia) que otros. Los operadores binarios de la misma precedencia se asocian de izquierda a derecha. La siguiente tabla enumera todos los operadores y su precedencia (mucho más corta y clara que en C o Java), de arriba a abajo es de mayor a menor. 
 
-![](./Resources/precedence.png)
+![](./.Resources/precedence.png)
 
 ---
 
@@ -306,5 +306,5 @@ Una variable de puntero contiene la dirección de memoria de otro valor, lo que 
 
 Podemos representar el uso de la memoria de la siguiente manera:
 
-![](./Resources/punteros.png)
+![](./.Resources/punteros.png)
 
