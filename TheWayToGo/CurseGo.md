@@ -308,3 +308,67 @@ Podemos representar el uso de la memoria de la siguiente manera:
 
 ![](./.Resources/punteros.png)
 
+---
+### Condicionales
+
+Dentro de los condicionales que podemos encontrar en GO, son:
+- **if-else**
+- **switch-case**
+- **select**
+
+En el curso de introduccion a GO se pudo conocer la estructura if-else por lo que no sera desarrollada en esta ocacion. Nos centraremos en los condicionales **switch-case** y **select**.
+
+###### El switch-case
+
+Esta palabra clave es util cuando se debe comprobar una variable contra valores diferentes. Podria decirse que es una concatenacion de **if-case**. Comparado con lenguajes como C y Java, Go es un poco mas flexible. La sintaxis general es:
+
+![](./.Resources/switch-general.png)
+
+
+Donde en cada caso, las variables **val1**, **val2** pueden ser de varios tipos de datos, no necesariamente *constantes* o *enteros*.
+Se puede testear mas de un valor en cada caso, los valores deben estar separados por coma (","). Por ejemplo:
+
+> **case** val1, val2, val3:
+
+Si comparamos estos 2 casos:
+![](./.Resources/switch-case1.png)
+
+*Contra:* 
+
+![](./.Resources/switch-case2.png)
+
+En el primer caso, si la condicion **i** es 0, no se ejecuta ningun codigo. Para el segundo cuerpo, si **i** es 0, con la palabra **fallthrough** se fuerza a buscar al siguiente caso que no contenga la palabra dicha palabra, es decir, codigo para ejecutar.
+ 
+**Fallthrough** también se puede usar en una jerarquía de casos donde en cada nivel se debe hacer algo además del código ya ejecutado en los casos superiores, y también se debe ejecutar una acción **default**. La rama **default** (*opcional*) se ejecuta cuando no se encuentra ningún valor que coincida con var1. Puede aparecer en cualquier lugar del conmutador (incluso como la primera rama), pero es mejor escribirlo como la última rama.
+
+###### switch y Condiciones
+
+En esta forma de declaración de **switch**, no se requiere ninguna variable (esto es, de hecho, un **switch** verdadero), y los casos pueden probar diferentes condiciones. Se parece mucho al encadenamiento if-else y ofrece una sintaxis más legible si hay muchas ramas.
+
+![](./.Resources/switch-condition.png)
+
+Podemos ver el siguiente ejemplo:
+
+![](./.Resources/switch-cond-example.png)
+
+###### Inicializacion y **switch**
+
+La declaracion de **switch** tambien puede contener inicializacion de variables. Por ejemplo:
+
+![](./.Resources/switch-init.png)
+
+Aqui, se estan declarando dos variables a, b que son inicializadas por los valores dentro de los arreglos x[i] e y[j]. El operador "**:=**" es el encargado de determinar el *tipo* de variable y asignar el valor.
+
+---
+# ¡Desafio!
+
+Cubrira lo siguiente:
+
+- Input.
+- Output.
+- Chequear entrada.
+- Mostar en salida.
+
+En el directorio del curso se encontrara el ejercicio con el nombre **challenge_02**. [Desafio_2](https://github.com/MnLujan/Go/tree/master/TheWayToGo/challenge_02). 
+
+---
