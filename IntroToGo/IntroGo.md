@@ -1,6 +1,6 @@
 #Documentacion Go
 ---
-###*Variables*
+### *Variables*
 
 Tenemos los mismos tipos de variables al igual que todos los leguajes, pero ¿como declararlos?
 
@@ -25,7 +25,7 @@ Si queremos declarar e inicializar la variable con un cierto valor, tenemos una 
 
 El compilador en tiempo de ejecucion detecta el tipo de variable que es y se lo asigna.
 
-###*Casteo*
+### *Casteo*
 
 La conversion de tipo de datos es siempre necesaria, para esto nos ofrecen la libreria **strconv** la cual debemos importar a nuestro proyecto. Esta libreria contiene varias funciones asique siempre es recomendable leer la documentacion de la misma.
 La sintaxis para la conversion de un dato es de las iguiente manera:
@@ -74,7 +74,7 @@ GO el unico metodo de iteracion que tiene es el **for** y tiene la misma sintaxi
  - for i>10{i++} *Habiendo declarado antes i*
  - for index; content := range myArray{} *Este ultimo simula el foreach, si el index no nos interesa, podemos usar el operador **_***
 ---
-###*Arreglos*
+### *Arreglos*
 
 Al igual que en C/C++ podemos declarar arreglos de tamaño fijo pero no dinamico. Si no especificamos el valor de inicializacion este se inicializara con los valores predeterminados por Go. (para enteros el 0, string "", etc).
 Podemos preguntar el tamaño de los arreglos mediante la funcion **len(array)**.
@@ -89,7 +89,7 @@ Podemos declarar el arreglo e inicializar algunas variables, el resto quedara co
 arreglo := [3]int{1,2}
 *La tercer posicion quedara con el valor 0*
 
-###*Slices*
+### *Slices*
 
 Estructura basada en arreglos que nos permite modificar su tamaño en tiempo de ejecucion y no es necesario definir su tamaño. La declaracion se realiza igual que un arreglo, pero sin especificar su tamaño, esto lo convierte en un **Slices**. Basicamente un Slices es una estructura en la que uno de sus datos es un puntero a un arreglo, en otro lugar de memoria.
 Al declarar el un Slices a diferendia de los arreglos, el valor almacenado es de tipo nulo o **nil**.
@@ -105,7 +105,7 @@ La expresion **[0:2]** indica que corta al arreglo entre la posicion 0 a 2 (sin 
 
 >[1,2]
 
-#####Make y Append
+##### Make y Append
 
 Otra manera de construir Slices es mediante la funcion **make(-,-,-)** la cual recibe 2 o 3 parametros, estos son:
 
@@ -130,7 +130,7 @@ Esta es una funcion que nos permite copiar un arreglo en otro. Recive 2 parametr
 >Sintaxis:
     copy(destino, fuente)
 ---
-###*Punteros*
+### *Punteros*
 
 La definicion de punteros en GO es identica a la de C/C++, por lo tanto no es necesario aclarar para que sirven y como funcionan. La sintaxis de la declaracion de un puntero es la siguiente:
 
@@ -142,7 +142,7 @@ x = &entero
 *Si no se agrega un valor, si valor predeterminado sera **nil***
 ---
 
-###Estructuras
+### Estructuras
 
 Las estructuras no sirven para definir un tipo de dato espcifico que dentro de este, se encuentren otros datos de tipo primitivos del lenguaje (int, string, bool, etc) o variables de otro tipo definido anteriormente. 
 
@@ -167,7 +167,7 @@ Este ultimo nos devuelve un puntero a la estructura.
     *name_var es ahora un puntero a la estructura*
 
 
-######Metodos
+###### Metodos
 
 Go no es un lenguaje orientado a objetos pero nos permite agregar funciones a las estructuras. Tenemos 2 maneras de declarar las funciones y hay que tener en claro para que las utilizaremos. Estas son:
 
@@ -182,7 +182,7 @@ Esta sintaxis tiene la particularidad de que la estructura pasada como parametro
 En este caso la funcion recibe un puntero a la estructura, por lo tanto los cambios que se realicen se veran reflejados en la estructura que llama.
 Esto se debe tener en cuenta dependiendo de que queremos hacer y si queremos ahorra memoria, ya que enviar una copia exacta de la estructura es costoso.
 
-######Campos anonimos
+###### Campos anonimos
 
 Como bien dijimos anteriormente, GO no es un lenguaje orientado a objetos pero existen estas opciones porque nos permiten replicar la **herencia** de estos lenguajes. Primero definimos una estructura para ejemplificar:
 
@@ -202,7 +202,7 @@ A continuacion definimos un campo anonimo:
 Podemos acceder a los valores de **Human** y a las funciones que esten asociadas a esta estructura desde **Tutor**. 
 
 ---
-###*Interfaces*
+### *Interfaces*
 
 Las interfaces son estructuras de datos que definen metodos vacios. Estos a su vez sin un tipo de dato que podemos pasar entre funciones. Esto nos permite que varias estructuras diferentes implementen la misma interfaz y a su vez, estas estructuras utilizar funciones que reciban a la interfaz como parametro, ahorrando codigo. 
 La declaraion de interfaces tiene la siguiente sintaxis:
@@ -228,7 +228,7 @@ Ademas, podemos implementar una funcion que reciba a la interfaz como parametro,
     }
 
 ---
-###*GOroutines*
+### *GOroutines*
 
 Entramos en la seccion de concurrencia dentro del lenguaje. Go no nos permite crear hilos como en java, ejecutamos "hilos" implementados a nivel de software, lo cual los hace mas livianos que un hilo comun. Go cuenta con un balanceador de cargas lo cual administra las distintas **Go routines** que asignemos. Se comportan de tal manera que pareciera que fueran hilos independientes, pero a bajo nivel no lo son. 
 
@@ -246,7 +246,7 @@ Otra manera de crear concurrencia es en lugar de llamar una funcion anteponiendo
     *Cualquier codigo aqui dentro sera ejecutado en concurrencia*
     }()
 
-######Channels
+###### Channels
 
 Los **Channels** o canales nos sirven para comunicar tareas que se esten realizando concurrentemente. Mediante estos canales podemos enviar numeros, cadenas, estructuras, etc.
 Para la creacion de un canal debemos utilizar la funcion **make()** antes vista.
@@ -270,9 +270,9 @@ Para ingresar o extraer datos desde el **channel** se utiliza el operador **<-**
 En el repositorio se adjunta un ejercicio **ej_channel/channels.go** ejemplificando mejor un codigo que haga uso de esta herramienta.
 
 ---
-###*Lectura de archivos*
+### *Lectura de archivos*
 
-######Version 1:
+###### Version 1:
 
 Implementaremos una nueva libreria llamada **io/ioutil** la cual contiene las funciones necesarias para la lectura de archivos.
 
@@ -290,7 +290,7 @@ data_file,err **:=** ioutil.ReadFile("*./ruta*")
 
 Go para leer el archvio de esa manera lo cargara en su totalidad en memoria, lo cual si nuestro archivo es grande podria traernos problemas. Ademas de que si quisieramos imprimir, nos imprime la totalidad del mismo.
 
-######Version 2:
+###### Version 2:
 
 Para la siguiente version necesitamos dos librerias antes vistas **os** y **bufio**. Estas librerias nos permiten leer el archivo linea por linea.
 Lo primero que debemos hacer es abrir el archivo:
@@ -314,7 +314,7 @@ Dentro del ejemplo en el repositorio se encuentra un ejemplo detallado. Buscar e
 
 ---
 
-###Defer
+### Defer
 
 Puede suceder por alguna confexion erronea del codigo, que nunca logremos ejecutar la funcion para cerrar el archivo. Esto es problematico y no es buen desempeño del codigo. Para esto existe el comando **defer** con el cual le decimos a GO que despues de que la funcion retorne o se produzca un error en la ejecucion si y solo si ejecute la funcion o bloque de codigo que continua a este comando.
 
@@ -322,7 +322,7 @@ Puede suceder por alguna confexion erronea del codigo, que nunca logremos ejecut
 **defer** **func()**{} *Ejecucion de un bloque de codigo*
 **defer** name_func() *Ejecucion de una funcion en particular*
 
-###Panic y Recover
+### Panic y Recover
 
 
 La sentencia **panic()** es utilizado para parar la ejecucion del programa y retornar la informacion del error. Si se produce un error que es capturado con un **panic()** este fuerza el *return* de todas las funciones que haya en el stack incluyendo el propio *main()*. Por utlimo imprimira la informacion del error y donde se produjo.
@@ -385,7 +385,7 @@ http.**ServeFile**(w,r,**r.URL.Path[1:]**)
 
 **Dentro de ej_web se encuentra un ejercicio que ejemplifica lo visto anteriormente**
 
-######JSON
+###### JSON
 
 Go es muy utilizado por las empresas para crear API's o servicios de Web y este lenguaje trae una libreria que puede hacer renders de JSON apartir de una estructura. Es una tecnologia ideal para las tareas antes mensionadas.
 
@@ -410,7 +410,7 @@ Para un mejor entendimiendo se encuentra un ejemplo en el repositorio. **ej_web_
 
 ---
 
-###Packages
+### Packages
 
 Se vera como se podra generar nuestros propios paquetes para poder utilziarlos en nuestros propios codigos o tener mas organizado todo un programa.
 
